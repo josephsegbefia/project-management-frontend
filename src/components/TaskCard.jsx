@@ -10,4 +10,3 @@ function TaskCard({ title, description }) {
 }
 
 export default TaskCard;
-

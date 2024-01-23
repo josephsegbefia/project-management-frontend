@@ -16,12 +16,12 @@ function App() {
     <div className="App">
       <Navbar />
 
-      <Routes>      
+      <Routes>
         <Route path="/" element={<HomePage />} />
 
         <Route
           path="/projects"
-          element={ <IsPrivate> <ProjectListPage /> </IsPrivate> } 
+          element={ <IsPrivate> <ProjectListPage /> </IsPrivate> }
         />
 
         <Route
@@ -31,9 +31,9 @@ function App() {
 
         <Route
           path="/projects/edit/:projectId"
-          element={ <IsPrivate> <EditProjectPage /> </IsPrivate> } 
+          element={ <IsPrivate> <EditProjectPage /> </IsPrivate> }
         />
-        
+
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
 

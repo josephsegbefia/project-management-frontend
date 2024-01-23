@@ -10,17 +10,17 @@ function EditProjectPage(props) {
 
   const navigate =  useNavigate();
   const { projectId } = useParams();
-  
-  
+
+
   useEffect(() => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem('authToken');
-    
-    // Send the token through the request "Authorization" Headers 
+
+    // Send the token through the request "Authorization" Headers
     axios
       .get(
         `${API_URL}/api/projects/${projectId}`,
-        { headers: { Authorization: `Bearer ${storedToken}` } }    
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
         const oneProject = response.data;
@@ -28,45 +28,45 @@ function EditProjectPage(props) {
         setDescription(oneProject.description);
       })
       .catch((error) => console.log(error));
-    
+
   }, [projectId]);
-  
+
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const requestBody = { title, description };
-  
-    // Get the token from the localStorage
-    const storedToken = localStorage.getItem('authToken');  
 
-    // Send the token through the request "Authorization" Headers   
+    // Get the token from the localStorage
+    const storedToken = localStorage.getItem('authToken');
+
+    // Send the token through the request "Authorization" Headers
     axios
       .put(
         `${API_URL}/api/projects/${projectId}`,
         requestBody,
-        { headers: { Authorization: `Bearer ${storedToken}` } }              
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
         navigate(`/projects/${projectId}`)
       });
   };
-  
-  
+
+
   const deleteProject = () => {
     // Get the token from the localStorage
-    const storedToken = localStorage.getItem('authToken');      
-    
-    // Send the token through the request "Authorization" Headers   
+    const storedToken = localStorage.getItem('authToken');
+
+    // Send the token through the request "Authorization" Headers
     axios
       .delete(
         `${API_URL}/api/projects/${projectId}`,
-        { headers: { Authorization: `Bearer ${storedToken}` } }           
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then(() => navigate("/projects"))
       .catch((err) => console.log(err));
-  };  
+  };
 
-  
+
   return (
     <div className="EditProjectPage">
       <h3>Edit the Project</h3>
@@ -79,7 +79,7 @@ function EditProjectPage(props) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        
+
         <label>Description:</label>
         <textarea
           name="description"

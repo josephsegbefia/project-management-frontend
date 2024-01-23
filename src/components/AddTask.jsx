@@ -8,9 +8,9 @@ function AddTask(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  
+
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     // We need the project id when creating the new task
     const { projectId } = props;
@@ -20,18 +20,18 @@ function AddTask(props) {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem('authToken');
 
-    // Send the token through the request "Authorization" Headers   
+    // Send the token through the request "Authorization" Headers
     axios
       .post(
         `${API_URL}/api/tasks`,
         requestBody,
-        { headers: { Authorization: `Bearer ${storedToken}` } }        
+        { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
         // Reset the state to clear the inputs
         setTitle("");
         setDescription("");
-      
+
         // Invoke the callback function coming through the props
         // from the ProjectDetailsPage, to refresh the project details
         props.refreshProject();
@@ -39,11 +39,11 @@ function AddTask(props) {
       .catch((error) => console.log(error));
   };
 
-  
+
   return (
     <div className="AddTask">
       <h3>Add New Task</h3>
-      
+
       <form onSubmit={handleSubmit}>
         <label>Title:</label>
         <input

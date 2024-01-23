@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 // We are deconstructing props object directly in the parentheses of the function
 function ProjectCard ( { title, description, _id } ) {
-  
+
   return (
     <div className="ProjectCard card">
       <Link to={`/projects/${_id}`}>
