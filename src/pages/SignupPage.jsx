@@ -11,6 +11,7 @@ function SignupPage(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -20,8 +21,15 @@ function SignupPage(props) {
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
 
+  const checkFields = () => {
+    if(email === '' || firstName === '' || lastName === '' || password === ''){
+      return true;
+    }
+    false
+  }
 
   const handleSignupSubmit = (e) => {
+
     e.preventDefault();
     // Create an object representing the request body
     const requestBody = { email, password, firstName, lastName };
@@ -31,6 +39,7 @@ function SignupPage(props) {
     // If the request resolves with an error, set the error message in the state
     axios.post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
+        setIsLoading(loading => !loading)
         navigate("/login");
       })
       .catch((error) => {
@@ -43,6 +52,8 @@ function SignupPage(props) {
   return (
     <div className="SignupPage">
       <h1>Sign Up</h1>
+
+      {isLoading && <p>Loading...</p>}
 
       <form onSubmit={handleSignupSubmit}>
         <label>Email:</label>
@@ -57,7 +68,7 @@ function SignupPage(props) {
         <label>Last Name:</label>
         <input type="text" name="lastname" value={lastName} onChange={handleLastName} />
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={checkFields()} >Sign Up</button>
       </form>
 
       { errorMessage && <p className="error-message">{errorMessage}</p> }
