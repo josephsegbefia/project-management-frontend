@@ -8,21 +8,23 @@ const API_URL = "http://localhost:5005";
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
 
-  
+
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleName = (e) => setName(e.target.value);
+  const handleFirstName = (e) => setFirstName(e.target.value);
+  const handleLastName = (e) => setLastName(e.target.value);
 
-  
+
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { email, password, name };
+    const requestBody = { email, password, firstName, lastName };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -37,7 +39,7 @@ function SignupPage(props) {
       })
   };
 
-  
+
   return (
     <div className="SignupPage">
       <h1>Sign Up</h1>
@@ -49,8 +51,11 @@ function SignupPage(props) {
         <label>Password:</label>
         <input type="password" name="password" value={password} onChange={handlePassword} />
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <label>First Name:</label>
+        <input type="text" name="firstname" value={firstName} onChange={handleFirstName} />
+
+        <label>Last Name:</label>
+        <input type="text" name="lastname" value={lastName} onChange={handleLastName} />
 
         <button type="submit">Sign Up</button>
       </form>
