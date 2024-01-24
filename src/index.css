@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
 }
 
@@ -13,22 +13,22 @@ select {
   min-width: 50px;
   margin: 5px;
   font-size: 18px;
-}
+} */
 
-label {
+/* label {
   width: 200px;
   display: block;
-}
-
+} */
+/*
 input,
 textarea {
   width: 200px;
   padding: 10px;
   display: inline-block;
   margin: 10px;
-}
+} */
 
-nav {
+/* nav {
   background: #515f7d;
   color: white;
   padding: 0px 20px;
@@ -36,16 +36,16 @@ nav {
   width: 100%;
   margin-bottom: 15px;
   padding: 5px;
-}
+} */
 
-nav li {
+/* nav li {
   list-style: none;
   color: white;
   font-size: 24px;
   font-weight: 600;
-}
+} */
 
-.card {
+/* .card {
   width: 400px;
   padding: 10px;
   box-shadow: 0px 2px 3px grey;
@@ -68,7 +68,7 @@ nav li {
   background: #f9eec3;
   border: 1px solid grey;
   box-shadow: 0px 2px 3px grey;
-  width: 400px;
+  width: 600px;
   text-align: center;
   margin: 0 auto;
   margin-bottom: 20px;
@@ -106,4 +106,14 @@ nav li {
 
 .TaskCard {
   background-color: #dfeef9;
+} */
+
+.container {
+  margin: 20px;
+}
+
+.column{
+  padding: 20px 40px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px gray;
 }

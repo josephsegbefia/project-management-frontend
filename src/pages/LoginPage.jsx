@@ -1,4 +1,6 @@
-import { useState, useContext } from "react";
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
@@ -9,6 +11,7 @@ function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [reload, setReload] = useState(false);
 
   const navigate = useNavigate();
 
@@ -16,6 +19,15 @@ function LoginPage(props) {
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+
+  const reloadPage = () => {
+    setReload(reload => !reload);
+    setErrorMessage(undefined);
+  }
+
+  useEffect(() => {
+    // Empty
+  }, [reload]);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -37,27 +49,61 @@ function LoginPage(props) {
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    <div className="container">
+      <div className="LoginPage columns">
+        <div className="column is-half is-offset-one-quarter">
+          <h1 className = 'has-text-centered is-size-3 has-text-primary'>Login</h1>
+          {errorMessage && (
+          <article className="message is-danger">
+            <div className="message-header">
+              <p>Error</p>
+              <button onClick = {reloadPage} className="delete" aria-label="delete"></button>
+            </div>
+            <div className = "message-body">
+              {errorMessage}
+            </div>
+          </article>
+        )}
+          <form onSubmit={handleLoginSubmit}>
+            <div className="field">
+              <p className="control has-icons-left has-icons-right">
+                <input
+                  className="input"
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={handleEmail}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+              </p>
+            </div>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+            <div className="field">
+              <p className="control has-icons-left">
+                <input
+                  className="input"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={handlePassword}
+                />
+                <span className="icon is-small is-left">
+                  <i className="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+            <p className="control">
+              <button className="button is-success">Login</button>
+            </p>
+          </form>
+          {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
+          <p>Don't have an account yet?</p>
+          <Link to={"/signup"}> Sign Up</Link>
+        </div>
+      </div>
     </div>
   );
 }

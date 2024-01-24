@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -29,7 +30,7 @@ function SignupPage(props) {
   }
 
   const handleSignupSubmit = (e) => {
-
+    setIsLoading(loading => !loading)
     e.preventDefault();
     // Create an object representing the request body
     const requestBody = { email, password, firstName, lastName };
@@ -53,9 +54,8 @@ function SignupPage(props) {
     <div className="SignupPage">
       <h1>Sign Up</h1>
 
-      {isLoading && <p>Loading...</p>}
 
-      <form onSubmit={handleSignupSubmit}>
+      {/* <form onSubmit={handleSignupSubmit}>
         <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleEmail} />
 
@@ -69,7 +69,9 @@ function SignupPage(props) {
         <input type="text" name="lastname" value={lastName} onChange={handleLastName} />
 
         <button type="submit" disabled={checkFields()} >Sign Up</button>
-      </form>
+      </form> */}
+
+
 
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
