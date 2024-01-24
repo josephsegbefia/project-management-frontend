@@ -51,8 +51,71 @@ function SignupPage(props) {
 
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className = "container">
+      <div className="SignupPage">
+        <h1>Sign Up</h1>
+
+
+          <form onSubmit={handleSignupSubmit}>
+            <div className = "columns">
+              <div className = "column is-one-quarter is-offset-one-quarter">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="First name"
+                      value={firstName}
+                      onChange={handleFirstName}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-user"></i>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div className = "column is-one-quarter">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Last name"
+                      value={lastName}
+                      onChange={handleLastName}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-user"></i>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className = "columns">
+              <div className = "column is-half is-offset-one-quarter">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={handleEmail}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope"></i>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </form>
+
+
+
+    </div>
 
 
       {/* <form onSubmit={handleSignupSubmit}>
@@ -70,6 +133,10 @@ function SignupPage(props) {
 
         <button type="submit" disabled={checkFields()} >Sign Up</button>
       </form> */}
+
+      <form>
+
+      </form>
 
 
 

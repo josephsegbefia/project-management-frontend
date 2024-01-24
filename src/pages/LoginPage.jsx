@@ -51,7 +51,7 @@ function LoginPage(props) {
   return (
     <div className="container">
       <div className="LoginPage columns">
-        <div className="column is-half is-offset-one-quarter">
+        <div className="column is-half is-offset-one-quarter login">
           <h1 className = 'has-text-centered is-size-3 has-text-primary'>Login</h1>
           {errorMessage && (
           <article className="message is-danger">
