@@ -28,10 +28,20 @@ function SignupPage(props) {
   const [reload, setReload] = useState(false);
 
   const checkFields = () => {
-    if(email === '' || firstName === '' || lastName === '' || password === ''){
+    if(email === '' || firstName === '' || lastName === '' || password === '' || repeatPassword === ''){
       return true;
     }
     false
+  }
+
+  const checkPasswordFields = () => {
+    if(password !== repeatPassword){
+      const error = 'Passwords do not match. Please review them';
+      setErrorMessage(error);
+      setPassword("");
+      setRepeatPassword("");
+    }
+    return;
   }
 
   const reloadPage = () => {
@@ -44,6 +54,7 @@ function SignupPage(props) {
     setIsLoading(loading => !loading)
     e.preventDefault();
     // Create an object representing the request body
+    checkPasswordFields();
     const requestBody = { email, password, firstName, lastName };
 
     // Make an axios request to the API
@@ -65,17 +76,21 @@ function SignupPage(props) {
     <div className = "container">
       <div className="SignupPage">
         <h1 className = 'has-text-centered is-size-3 has-text-primary'>Sign Up</h1>
-        {errorMessage && (
-          <article className="message is-danger">
-            <div className="message-header">
-              <p>Error</p>
-              <button onClick = {reloadPage} className="delete" aria-label="delete"></button>
-            </div>
-            <div className = "message-body">
-              {errorMessage}
-            </div>
-          </article>
-        )}
+        <div className = "columns">
+          <div className = "column is-half is-offset-one-quarter">
+              {errorMessage && (
+                <article className="message is-danger">
+                  <div className="message-header">
+                    <p>Error</p>
+                    <button onClick = {reloadPage} className="delete" aria-label="delete"></button>
+                  </div>
+                  <div className = "message-body">
+                    {errorMessage}
+                  </div>
+                </article>
+            )}
+          </div>
+        </div>
         <form onSubmit={handleSignupSubmit}>
           <div className = "columns">
             <div className = "column is-one-quarter is-offset-one-quarter">
@@ -138,7 +153,7 @@ function SignupPage(props) {
                 <p className="control has-icons-left has-icons-right">
                   <input
                     className="input"
-                    type="text"
+                    type="password"
                     placeholder="Passord"
                     value={password}
                     onChange={handlePassword}
@@ -155,10 +170,10 @@ function SignupPage(props) {
                 <p className="control has-icons-left has-icons-right">
                   <input
                     className="input"
-                    type="text"
+                    type="password"
                     placeholder="Repeat Password"
-                    value={lastName}
-                    onChange={handleLastName}
+                    value={repeatPassword}
+                    onChange={handleRepeatPassword}
                   />
                   <span className="icon is-small is-left">
                     <FontAwesomeIcon icon = {faLock}/>
@@ -171,7 +186,7 @@ function SignupPage(props) {
           <div className = "columns">
             <div className = "column is-half is-offset-one-quarter">
               <p className="control">
-                <button className="button is-success">Sign Up</button>
+                <button className="button is-success" disabled = {checkFields()}>Sign Up</button>
               </p>
             </div>
           </div>
