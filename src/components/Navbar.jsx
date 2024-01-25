@@ -44,7 +44,7 @@ function Navbar() {
             <div className="navbar-item">
               <div className="buttons">
                 <button className="button">
-                  <Link to="/projects">
+                  <Link to = {`/${user._id}/projects`}>
                     <strong>Projects</strong>
                   </Link>
                 </button>

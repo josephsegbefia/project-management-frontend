@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -11,6 +12,9 @@ import LoginPage from "./pages/LoginPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 
+
+
+
 function App() {
   return (
     <div className="App">
@@ -19,12 +23,12 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route
-          path="/projects"
+          path= '/:userId/projects'
           element={ <IsPrivate> <ProjectListPage /> </IsPrivate> }
         />
 
         <Route
-          path="/projects/:projectId"
+          path="/:userId/projects/:projectId"
           element={ <IsPrivate> <ProjectDetailsPage /> </IsPrivate> }
         />
 
