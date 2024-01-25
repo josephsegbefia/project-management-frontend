@@ -4,6 +4,8 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 const API_URL = "http://localhost:5005";
 
@@ -12,6 +14,7 @@ function LoginPage(props) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [reload, setReload] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,7 +22,9 @@ function LoginPage(props) {
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
   const reloadPage = () => {
     setReload(reload => !reload);
     setErrorMessage(undefined);
@@ -48,10 +53,12 @@ function LoginPage(props) {
       });
   };
 
+  console.log(showPassword);
+
   return (
     <div className="container">
       <div className="LoginPage columns">
-        <div className="column is-half is-offset-one-quarter login">
+        <div className="column is-half is-offset-one-quarter auth">
           <h1 className = 'has-text-centered is-size-3 has-text-primary'>Login</h1>
           {errorMessage && (
           <article className="message is-danger">
@@ -66,7 +73,7 @@ function LoginPage(props) {
         )}
           <form onSubmit={handleLoginSubmit}>
             <div className="field">
-              <p className="control has-icons-left has-icons-right">
+              <p className="control has-icons-left has-icons-right has-icons-left">
                 <input
                   className="input"
                   type="email"
@@ -75,23 +82,26 @@ function LoginPage(props) {
                   onChange={handleEmail}
                 />
                 <span className="icon is-small is-left">
-                  <i className="fas fa-envelope"></i>
+                  <FontAwesomeIcon icon = {faEnvelope}/>
                 </span>
               </p>
             </div>
 
             <div className="field">
-              <p className="control has-icons-left">
+              <p className="control has-icons-left has-icons-right">
                 <input
                   className="input"
-                  type="password"
+                  type = {showPassword ? "text" : "password"}
                   placeholder="Password"
                   value={password}
                   onChange={handlePassword}
                 />
                 <span className="icon is-small is-left">
-                  <i className="fas fa-lock"></i>
+                  <FontAwesomeIcon icon = {faLock}/>
                 </span>
+                <button onClick = {handleShowPassword} className = "icon is-small is-right">
+                  <FontAwesomeIcon icon = {showPassword ? faEyeSlash : faEye}/>
+                </button>
               </p>
             </div>
 

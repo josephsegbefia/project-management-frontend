@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
@@ -9,6 +11,7 @@ const API_URL = "http://localhost:5005";
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -19,6 +22,7 @@ function SignupPage(props) {
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+  const handleRepeatPassword = (e) => setRepeatPassword(e.target.value);
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
 
@@ -53,9 +57,7 @@ function SignupPage(props) {
   return (
     <div className = "container">
       <div className="SignupPage">
-        <h1>Sign Up</h1>
-
-
+      <h1 className = 'has-text-centered is-size-3 has-text-primary'>Sign Up</h1>
           <form onSubmit={handleSignupSubmit}>
             <div className = "columns">
               <div className = "column is-one-quarter is-offset-one-quarter">
@@ -69,7 +71,7 @@ function SignupPage(props) {
                       onChange={handleFirstName}
                     />
                     <span className="icon is-small is-left">
-                      <i className="fas fa-user"></i>
+                      <FontAwesomeIcon icon = {faUser}/>
                     </span>
                   </p>
                 </div>
@@ -86,7 +88,7 @@ function SignupPage(props) {
                       onChange={handleLastName}
                     />
                     <span className="icon is-small is-left">
-                      <i className="fas fa-user"></i>
+                      <FontAwesomeIcon icon = {faUser}/>
                     </span>
                   </p>
                 </div>
@@ -105,12 +107,49 @@ function SignupPage(props) {
                       onChange={handleEmail}
                     />
                     <span className="icon is-small is-left">
-                      <i className="fas fa-envelope"></i>
+                      <FontAwesomeIcon icon = {faEnvelope}/>
                     </span>
                   </p>
                 </div>
               </div>
             </div>
+
+            <div className = "columns">
+              <div className = "column is-one-quarter is-offset-one-quarter">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Passord"
+                      value={password}
+                      onChange={handlePassword}
+                    />
+                    <span className="icon is-small is-left">
+                      <FontAwesomeIcon icon = {faLock}/>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div className = "column is-one-quarter">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Repeat Password"
+                      value={lastName}
+                      onChange={handleLastName}
+                    />
+                    <span className="icon is-small is-left">
+                      <FontAwesomeIcon icon = {faLock}/>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </form>
 
 
