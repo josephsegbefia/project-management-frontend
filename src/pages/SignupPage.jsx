@@ -25,6 +25,7 @@ function SignupPage(props) {
   const handleRepeatPassword = (e) => setRepeatPassword(e.target.value);
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
+  const [reload, setReload] = useState(false);
 
   const checkFields = () => {
     if(email === '' || firstName === '' || lastName === '' || password === ''){
@@ -32,6 +33,12 @@ function SignupPage(props) {
     }
     false
   }
+
+  const reloadPage = () => {
+    setReload(reload => !reload);
+    setErrorMessage(undefined);
+  }
+
 
   const handleSignupSubmit = (e) => {
     setIsLoading(loading => !loading)
@@ -57,132 +64,126 @@ function SignupPage(props) {
   return (
     <div className = "container">
       <div className="SignupPage">
-      <h1 className = 'has-text-centered is-size-3 has-text-primary'>Sign Up</h1>
-          <form onSubmit={handleSignupSubmit}>
-            <div className = "columns">
-              <div className = "column is-one-quarter is-offset-one-quarter">
-                <div className="field">
-                  <p className="control has-icons-left has-icons-right">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="First name"
-                      value={firstName}
-                      onChange={handleFirstName}
-                    />
-                    <span className="icon is-small is-left">
-                      <FontAwesomeIcon icon = {faUser}/>
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              <div className = "column is-one-quarter">
-                <div className="field">
-                  <p className="control has-icons-left has-icons-right">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Last name"
-                      value={lastName}
-                      onChange={handleLastName}
-                    />
-                    <span className="icon is-small is-left">
-                      <FontAwesomeIcon icon = {faUser}/>
-                    </span>
-                  </p>
-                </div>
+        <h1 className = 'has-text-centered is-size-3 has-text-primary'>Sign Up</h1>
+        {errorMessage && (
+          <article className="message is-danger">
+            <div className="message-header">
+              <p>Error</p>
+              <button onClick = {reloadPage} className="delete" aria-label="delete"></button>
+            </div>
+            <div className = "message-body">
+              {errorMessage}
+            </div>
+          </article>
+        )}
+        <form onSubmit={handleSignupSubmit}>
+          <div className = "columns">
+            <div className = "column is-one-quarter is-offset-one-quarter">
+              <div className="field">
+                <p className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="First name"
+                    value={firstName}
+                    onChange={handleFirstName}
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon = {faUser}/>
+                  </span>
+                </p>
               </div>
             </div>
 
-            <div className = "columns">
-              <div className = "column is-half is-offset-one-quarter">
-                <div className="field">
-                  <p className="control has-icons-left has-icons-right">
-                    <input
-                      className="input"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={handleEmail}
-                    />
-                    <span className="icon is-small is-left">
-                      <FontAwesomeIcon icon = {faEnvelope}/>
-                    </span>
-                  </p>
-                </div>
+            <div className = "column is-one-quarter">
+              <div className="field">
+                <p className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Last name"
+                    value={lastName}
+                    onChange={handleLastName}
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon = {faUser}/>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className = "columns">
+            <div className = "column is-half is-offset-one-quarter">
+              <div className="field">
+                <p className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleEmail}
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon = {faEnvelope}/>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className = "columns">
+            <div className = "column is-one-quarter is-offset-one-quarter">
+              <div className="field">
+                <p className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Passord"
+                    value={password}
+                    onChange={handlePassword}
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon = {faLock}/>
+                  </span>
+                </p>
               </div>
             </div>
 
-            <div className = "columns">
-              <div className = "column is-one-quarter is-offset-one-quarter">
-                <div className="field">
-                  <p className="control has-icons-left has-icons-right">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Passord"
-                      value={password}
-                      onChange={handlePassword}
-                    />
-                    <span className="icon is-small is-left">
-                      <FontAwesomeIcon icon = {faLock}/>
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              <div className = "column is-one-quarter">
-                <div className="field">
-                  <p className="control has-icons-left has-icons-right">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Repeat Password"
-                      value={lastName}
-                      onChange={handleLastName}
-                    />
-                    <span className="icon is-small is-left">
-                      <FontAwesomeIcon icon = {faLock}/>
-                    </span>
-                  </p>
-                </div>
+            <div className = "column is-one-quarter">
+              <div className="field">
+                <p className="control has-icons-left has-icons-right">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Repeat Password"
+                    value={lastName}
+                    onChange={handleLastName}
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon icon = {faLock}/>
+                  </span>
+                </p>
               </div>
             </div>
+          </div>
 
-          </form>
+          <div className = "columns">
+            <div className = "column is-half is-offset-one-quarter">
+              <p className="control">
+                <button className="button is-success">Sign Up</button>
+              </p>
+            </div>
+          </div>
 
-
-
-    </div>
-
-
-      {/* <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
-
-        <label>First Name:</label>
-        <input type="text" name="firstname" value={firstName} onChange={handleFirstName} />
-
-        <label>Last Name:</label>
-        <input type="text" name="lastname" value={lastName} onChange={handleLastName} />
-
-        <button type="submit" disabled={checkFields()} >Sign Up</button>
-      </form> */}
-
-      <form>
-
-      </form>
-
-
-
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+          <div className = "columns">
+            <div className = "column is-one-quarter is-offset-one-quarter">
+              <p>Already have account?</p>
+              <Link to={"/login"}> Login</Link>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
